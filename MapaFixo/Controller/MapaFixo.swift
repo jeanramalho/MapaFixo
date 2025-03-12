@@ -25,7 +25,20 @@ class MapaFixo: UIViewController, MKMapViewDelegate {
     }
     
     private func setupContentView(){
+        let mapView = contentView.mapa
         
+        let latitute: CLLocationDegrees = -23.671381
+        let longitude: CLLocationDegrees = -46.787179
+        
+        let latDelta: CLLocationDegrees = 0.001
+        let longDelta: CLLocationDegrees = 0.001
+        
+        let localizacao: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitute, longitude)
+        let areaVisualizacao: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: longDelta)
+        
+        let region: MKCoordinateRegion = MKCoordinateRegion(center: localizacao, span: areaVisualizacao)
+        
+        mapView.setRegion(region, animated: true)
     }
     
     private func setHierarchy(){
