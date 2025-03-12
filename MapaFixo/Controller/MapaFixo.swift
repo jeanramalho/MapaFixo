@@ -27,8 +27,8 @@ class MapaFixo: UIViewController, MKMapViewDelegate {
     private func setupContentView(){
         let mapView = contentView.mapa
         
-        let latitute: CLLocationDegrees = -23.671381
-        let longitude: CLLocationDegrees = -46.787179
+        let latitute: CLLocationDegrees = -23.670803
+        let longitude: CLLocationDegrees = -46.7885849
         
         let latDelta: CLLocationDegrees = 0.001
         let longDelta: CLLocationDegrees = 0.001
@@ -39,6 +39,13 @@ class MapaFixo: UIViewController, MKMapViewDelegate {
         let region: MKCoordinateRegion = MKCoordinateRegion(center: localizacao, span: areaVisualizacao)
         
         mapView.setRegion(region, animated: true)
+        
+        let anotacao = MKPointAnnotation()
+        anotacao.coordinate = localizacao
+        anotacao.title = "Minha Casa"
+        anotacao.subtitle = "Essa é a marcação da minha casa na Rua Silvia de Faria Marcondes, 445, Parque Fernanda"
+        
+        mapView.addAnnotation(anotacao)
     }
     
     private func setHierarchy(){
