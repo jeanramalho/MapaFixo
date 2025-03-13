@@ -10,10 +10,11 @@ import MapKit
 
 //instala o framework externo coreLocation para acompanhar usuário de forma mais rápida do que nativamente
 
-class MapaFixo: UIViewController, MKMapViewDelegate {
-    
+class MapaFixo: UIViewController {
+
     let contentView: MapaView = MapaView()
     var locationManager = CLLocationManager()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,22 +30,10 @@ class MapaFixo: UIViewController, MKMapViewDelegate {
     }
     
     private func setupContentView(){
-        let mapView = contentView.mapa
-        // Mostra a localização do usuário
-        mapView.showsUserLocation = true
         
-//        let latitute: CLLocationDegrees = -23.670803
-//        let longitude: CLLocationDegrees = -46.7885849
-//        
-//        let latDelta: CLLocationDegrees = 0.001
-//        let longDelta: CLLocationDegrees = 0.001
-//        
-//        let localizacao: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitute, longitude)
-//        let areaVisualizacao: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: longDelta)
-//        
-//        let region: MKCoordinateRegion = MKCoordinateRegion(center: localizacao, span: areaVisualizacao)
-//        
-//        mapView.setRegion(region, animated: true)
+        
+        
+
 //        
 //        let anotacao = MKPointAnnotation()
 //        anotacao.coordinate = localizacao
@@ -73,7 +62,7 @@ class MapaFixo: UIViewController, MKMapViewDelegate {
 
 }
 
-extension MapaFixo: CLLocationManagerDelegate {
+extension MapaFixo: CLLocationManagerDelegate, MKMapViewDelegate {
     
     private func setupLocation(){
         
@@ -86,6 +75,38 @@ extension MapaFixo: CLLocationManagerDelegate {
         //acompanha movimentação do usuário
         locationManager.startUpdatingLocation()
         
+    }
+    
+    // Método para acompanhar a localização do usuário
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        // Pega o mapa da contentView
+        let mapView = contentView.mapa
+        // Mostra a localização do usuário
+        mapView.showsUserLocation = true
+        
+        // pega a ultima localizacao do usuário no array de localização do locations
+        guard let userLocation = locations.last else {return}
+        
+        // monta exibição do mapa
+        //pega latitute e longitude atual do usuario
+        let latitute: CLLocationDegrees = userLocation.coordinate.latitude
+        let longitude: CLLocationDegrees = userLocation.coordinate.longitude
+        
+        //configura a latitude e longitude Delta, que é a distancia da exibição do ponto configurado
+        let latDelta: CLLocationDegrees = 0.01
+        let longDelta: CLLocationDegrees = 0.01
+        
+        // Cria uma variavel de localização utilizando a latitude e logintude capturadas do array de localização atual
+        let localizacao: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitute, longitude)
+        // Cria uma variável de coordenadas Delpa para distancia da exibição
+        let areaVisualizacao: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: longDelta)
+        
+        // Cria uma variável para passar a localização e a area de visualização configurados
+        let region: MKCoordinateRegion = MKCoordinateRegion(center: localizacao, span: areaVisualizacao)
+        
+        // Seta a região a ser exibida no mapa
+        mapView.setRegion(region, animated: true)
         
     }
 }
