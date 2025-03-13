@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		CE46EC432D8307EA00DA74C5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE46EC422D8307EA00DA74C5 /* CoreLocation.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		CE46EC422D8307EA00DA74C5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CEBFAA8C2D81C97500D126F1 /* MapaFixo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapaFixo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -36,16 +41,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE46EC432D8307EA00DA74C5 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE46EC412D8307EA00DA74C5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE46EC422D8307EA00DA74C5 /* CoreLocation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CEBFAA832D81C97400D126F1 = {
 			isa = PBXGroup;
 			children = (
 				CEBFAA8E2D81C97500D126F1 /* MapaFixo */,
+				CE46EC412D8307EA00DA74C5 /* Frameworks */,
 				CEBFAA8D2D81C97500D126F1 /* Products */,
 			);
 			sourceTree = "<group>";

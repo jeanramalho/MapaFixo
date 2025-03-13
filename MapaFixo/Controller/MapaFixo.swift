@@ -11,6 +11,7 @@ import MapKit
 class MapaFixo: UIViewController, MKMapViewDelegate {
     
     let contentView: MapaView = MapaView()
+    var locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,7 @@ class MapaFixo: UIViewController, MKMapViewDelegate {
     
     private func setup(){
         
+        setupLocation()
         setupContentView()
         setHierarchy()
         setConstraints()
@@ -65,5 +67,15 @@ class MapaFixo: UIViewController, MKMapViewDelegate {
     }
 
 
+}
+
+extension MapaFixo: CLLocationManagerDelegate {
+    
+    private func setupLocation(){
+        
+        locationManager.delegate = self
+        //configura precisao
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
 }
 
